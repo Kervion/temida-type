@@ -1,91 +1,40 @@
-import Image from 'next/image'
-import { Inter } from 'next/font/google'
-import styles from './page.module.css'
+import { Fredericka_the_Great } from "next/font/google"
+const font = Fredericka_the_Great({ subsets: ["latin"], weight: ["400"], display: "swap" })
 
-const inter = Inter({ subsets: ['latin'] })
+import Drzewo from "./Drzewo"
 
-export default function Home() {
+type dataType = {
+  uid: string
+  parentUid: null | string
+  name: string
+}[]
+
+const DATA: dataType = [
+  { uid: "1", parentUid: null, name: "Node 1" },
+  { uid: "2", parentUid: "1", name: "Node 1.1" },
+  { uid: "3", parentUid: "2", name: "Node 1.1.1" },
+  { uid: "4", parentUid: "1", name: "Node 1.2" },
+  { uid: "5", parentUid: "4", name: "Node 1.2.1" },
+  { uid: "6", parentUid: null, name: "Node 2" },
+  { uid: "7", parentUid: "6", name: "Node 2.1" },
+]
+
+const App = () => {
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>app/page.tsx</code>
-        </p>
+    <div className="flex flex-col h-screen items-center bg-gradient-to-br from-sky-900  to-amber-600 text-slate-800 ">
+      <div className={font.className}>
+        <h1 className="text-6xl text-orange-200 pt-[100px] pb-[30px]">Temida : tree & moveUp</h1>
+      </div>
+      <div className="flex">
         <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+          <div className={font.className}>
+            <h1 className="text-3xl text-orange-200 text-center">v1</h1>
+          </div>
+          <Drzewo drzewo={DATA} />
         </div>
       </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-        <div className={styles.thirteen}>
-          <Image src="/thirteen.svg" alt="13" width={40} height={31} priority />
-        </div>
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://beta.nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={inter.className}>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p className={inter.className}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={inter.className}>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p className={inter.className}>Explore the Next.js 13 playground.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={inter.className}>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p className={inter.className}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
+    </div>
   )
 }
+
+export default App
